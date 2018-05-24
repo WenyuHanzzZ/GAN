@@ -1,0 +1,714 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{GAN\_MNIST}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf} 
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{examples}\PY{n+nn}{.}\PY{n+nn}{tutorials}\PY{n+nn}{.}\PY{n+nn}{mnist} \PY{k}{import} \PY{n}{input\PYZus{}data}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{n}{mnist} \PY{o}{=} \PY{n}{input\PYZus{}data}\PY{o}{.}\PY{n}{read\PYZus{}data\PYZus{}sets}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MNIST\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Extracting MNIST\_data/train-images-idx3-ubyte.gz
+Extracting MNIST\_data/train-labels-idx1-ubyte.gz
+Extracting MNIST\_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST\_data/t10k-labels-idx1-ubyte.gz
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mnist}\PY{o}{.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}503}]:} \PY{k}{def} \PY{n+nf}{generator}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{n}{Output\PYZus{}dimension}\PY{p}{,} \PY{n}{n\PYZus{}units}\PY{p}{,} \PY{n}{reuse}\PY{p}{,} \PY{n}{alpha}\PY{p}{)}\PY{p}{:}
+              \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{generator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reuse}\PY{o}{=}\PY{n}{reuse}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} creat a variable scope to save the variable under the \PYZsq{}generator\PYZsq{} variable list  }
+                  \PY{n}{H\PYZus{}layer1}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dense}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{n}{n\PYZus{}units}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZus{}dense\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} hidden layer: input is latent variable, number of units= 128}
+                  \PY{n}{H\PYZus{}layer1}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{H\PYZus{}layer1}\PY{p}{,} \PY{n}{alpha}\PY{o}{*}\PY{n}{H\PYZus{}layer1}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} this maximum combine with dense layer can realize the Leaky ReLU }
+                  \PY{c+c1}{\PYZsh{} alpha is a parameter which is less than 1}
+                  \PY{n}{logits}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dense}\PY{p}{(}\PY{n}{H\PYZus{}layer1}\PY{p}{,} \PY{n}{Output\PYZus{}dimension}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZus{}dense\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} logits layer:Output dimension=724 }
+                  \PY{n}{Out}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{logits}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} output is rescaled into between \PYZhy{}1 to 1 }
+                  \PY{k}{return} \PY{n}{Out}\PY{p}{,} \PY{n}{logits}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}504}]:} \PY{k}{def} \PY{n+nf}{discriminator}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}units}\PY{p}{,} \PY{n}{reuse}\PY{p}{,} \PY{n}{alpha}\PY{p}{)}\PY{p}{:}
+              \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{discriminator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{reuse}\PY{o}{=}\PY{n}{reuse}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} creat a variable scope to save the variable under the \PYZsq{}discriminator\PYZsq{} variable list}
+                  \PY{n}{H\PYZus{}layer1}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dense}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{n\PYZus{}units}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D\PYZus{}dense\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} Hidden layer: input is the images to be discriminated, number of units=128}
+                  \PY{n}{H\PYZus{}layer1}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{H\PYZus{}layer1}\PY{p}{,}\PY{n}{alpha}\PY{o}{*}\PY{n}{H\PYZus{}layer1}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} smae as generator: creat the operation as Leaky ReLU}
+                  \PY{n}{logits}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{dense}\PY{p}{(}\PY{n}{H\PYZus{}layer1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D\PYZus{}dense\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} logits layer: output dimension is 1}
+                  \PY{n}{Out}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{logits}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} output value: when it is close to 1, it will be treated as the real image, vice versa.}
+                  \PY{k}{return} \PY{n}{Out}\PY{p}{,} \PY{n}{logits}
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}505}]:} \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}\PY{c+c1}{\PYZsh{} reset the default graph }
+          \PY{n}{z}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} creat placeholder for input latent variable z, dimension=[batch size, 100]}
+          \PY{n}{real\PYZus{}image}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{,}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{real\PYZus{}image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} creat placeholder for the real trainging data, dimension= [batch size, 724] }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}506}]:} \PY{c+c1}{\PYZsh{} initial input parameter set here}
+          \PY{n}{Output\PYZus{}dimension}\PY{o}{=}\PY{l+m+mi}{784}
+          \PY{n}{n\PYZus{}units}\PY{o}{=}\PY{l+m+mi}{128}
+          \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.01}
+          \PY{n}{smooth}\PY{o}{=}\PY{l+m+mf}{0.1}
+          \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.002}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}507}]:} \PY{c+c1}{\PYZsh{} creat generator network }
+          \PY{n}{g\PYZus{}out}\PY{p}{,}\PY{n}{g\PYZus{}logits}\PY{o}{=}\PY{n}{generator}\PY{p}{(}\PY{n}{z}\PY{p}{,}\PY{n}{Output\PYZus{}dimension}\PY{p}{,}\PY{n}{n\PYZus{}units}\PY{p}{,}\PY{k+kc}{False}\PY{p}{,}\PY{n}{alpha}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} creat discriminator network}
+          \PY{n}{d\PYZus{}out\PYZus{}real}\PY{p}{,}\PY{n}{d\PYZus{}logits\PYZus{}real}\PY{o}{=}\PY{n}{discriminator}\PY{p}{(}\PY{n}{real\PYZus{}image}\PY{p}{,}\PY{n}{n\PYZus{}units}\PY{p}{,}\PY{k+kc}{False}\PY{p}{,}\PY{n}{alpha}\PY{p}{)}
+          \PY{n}{d\PYZus{}out\PYZus{}fake}\PY{p}{,}\PY{n}{d\PYZus{}logits\PYZus{}fake}\PY{o}{=}\PY{n}{discriminator}\PY{p}{(}\PY{n}{g\PYZus{}out}\PY{p}{,}\PY{n}{n\PYZus{}units}\PY{p}{,}\PY{k+kc}{True}\PY{p}{,}\PY{n}{alpha}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}508}]:} \PY{c+c1}{\PYZsh{} loss funtion goes here }
+          \PY{c+c1}{\PYZsh{} firstly label the real image from the training data by 1 and fake image from the generetor by 0}
+          \PY{c+c1}{\PYZsh{} In order toreduce overfitting, use the label smoothing method here: it prevents a network}
+          \PY{c+c1}{\PYZsh{}from assigning full probability to each training example and maintains a reasonable ratio between}
+          \PY{c+c1}{\PYZsh{} the logits of the incorrect classes. }
+          \PY{c+c1}{\PYZsh{}And from the experiment result of this paper smooth=0.1 always perform well}
+          \PY{n}{real\PYZus{}label}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{d\PYZus{}logits\PYZus{}real}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{smooth}\PY{p}{)}
+          \PY{n}{fake\PYZus{}label}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{d\PYZus{}logits\PYZus{}fake}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} discriminator loss funtion }
+          \PY{n}{d\PYZus{}loss\PYZus{}real}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{sigmoid\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n}{real\PYZus{}label}\PY{p}{,}\PY{n}{logits}\PY{o}{=}\PY{n}{d\PYZus{}logits\PYZus{}real}\PY{p}{)}
+          \PY{n}{d\PYZus{}loss\PYZus{}fake}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{sigmoid\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n}{fake\PYZus{}label}\PY{p}{,}\PY{n}{logits}\PY{o}{=}\PY{n}{d\PYZus{}logits\PYZus{}fake}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} here uing the sigmoid\PYZus{}cross\PYZus{}entropy, causing the label is between 0 to 1.}
+          \PY{c+c1}{\PYZsh{} discriminator loss funtion is that training the discriminator to assign the right label to real}
+          \PY{c+c1}{\PYZsh{} image 1 and to fake image 0 as precisely as possible}
+          \PY{n}{d\PYZus{}loss}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{d\PYZus{}loss\PYZus{}real}\PY{o}{+}\PY{n}{d\PYZus{}loss\PYZus{}fake}\PY{p}{)}\PY{c+c1}{\PYZsh{} total loss is the summation of both two parts}
+          \PY{n}{g\PYZus{}loss}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}
+              \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{sigmoid\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{d\PYZus{}logits\PYZus{}fake}\PY{p}{)}\PY{p}{,}
+                                                                        \PY{n}{logits}\PY{o}{=}\PY{n}{d\PYZus{}logits\PYZus{}fake}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} generator loss funtion is that training the generator to generator fake images that are more like }
+          \PY{c+c1}{\PYZsh{} real ones, that is the labels are close to 1.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}509}]:} \PY{c+c1}{\PYZsh{} define the optimizer}
+          \PY{c+c1}{\PYZsh{} In order to train the generator and discriminator seperately, seperate the variable of }
+          \PY{c+c1}{\PYZsh{} discriminator and generator into two parts g\PYZus{}var and d\PYZus{}var}
+          \PY{n}{var}\PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{trainable\PYZus{}variables}\PY{p}{(}\PY{p}{)}
+          \PY{n}{g\PYZus{}vars} \PY{o}{=} \PY{p}{[}\PY{n}{var} \PY{k}{for} \PY{n}{var} \PY{o+ow}{in} \PY{n}{var} \PY{k}{if} \PY{n}{var}\PY{o}{.}\PY{n}{name}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{generator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+          \PY{n}{d\PYZus{}vars} \PY{o}{=} \PY{p}{[}\PY{n}{var} \PY{k}{for} \PY{n}{var} \PY{o+ow}{in} \PY{n}{var} \PY{k}{if} \PY{n}{var}\PY{o}{.}\PY{n}{name}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{discriminator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} then define the discriminator here.}
+          \PY{c+c1}{\PYZsh{} in order to compare different optimizer, use different optimizers here}
+          \PY{n}{d\PYZus{}train\PYZus{}op\PYZus{}adam}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}
+              \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{d\PYZus{}loss}\PY{p}{,} \PY{n}{var\PYZus{}list}\PY{o}{=}\PY{n}{d\PYZus{}vars}\PY{p}{)}
+          \PY{n}{g\PYZus{}train\PYZus{}op\PYZus{}adam}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}
+              \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{g\PYZus{}loss}\PY{p}{,} \PY{n}{var\PYZus{}list}\PY{o}{=}\PY{n}{g\PYZus{}vars}\PY{p}{)}
+          
+          \PY{n}{d\PYZus{}train\PYZus{}op\PYZus{}SGD}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{GradientDescentOptimizer}\PY{p}{(}
+              \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{d\PYZus{}loss}\PY{p}{,} \PY{n}{var\PYZus{}list}\PY{o}{=}\PY{n}{d\PYZus{}vars}\PY{p}{)}
+          
+          \PY{n}{g\PYZus{}train\PYZus{}op\PYZus{}SGD}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{GradientDescentOptimizer}\PY{p}{(}
+              \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{g\PYZus{}loss}\PY{p}{,} \PY{n}{var\PYZus{}list}\PY{o}{=}\PY{n}{g\PYZus{}vars}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}510}]:} \PY{c+c1}{\PYZsh{} training the model }
+          \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{100}\PY{c+c1}{\PYZsh{} batch size is 100}
+          \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{100} \PY{c+c1}{\PYZsh{} number of epochs =100}
+          \PY{n}{sample}\PY{o}{=}\PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} creat a empty list space to save the samples from the generator in each epoch }
+          \PY{n}{loss}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{c+c1}{\PYZsh{} creat a empty list space to save the loss function value during the optimization history}
+          \PY{n}{saver}\PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{Saver}\PY{p}{(}\PY{n}{var\PYZus{}list}\PY{o}{=}\PY{n}{g\PYZus{}vars}\PY{p}{)}
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{num\PYZus{}examples}\PY{o}{/}\PY{o}{/}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{batch} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{next\PYZus{}batch}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{} choose random batch from the oringinal data with batch size 100 }
+                      \PY{n}{real\PYZus{}batch}\PY{o}{=}\PY{n}{batch}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{}here rescale the input real image from 0\PYZhy{}1 to \PYZhy{}1 to 1 }
+                      \PY{n}{real\PYZus{}batch}\PY{o}{=}\PY{n}{real\PYZus{}batch}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                      \PY{n}{latent} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+                      
+                      \PY{c+c1}{\PYZsh{} run optimizer }
+                      
+                      \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{d\PYZus{}train\PYZus{}op\PYZus{}SGD}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{real\PYZus{}image}\PY{p}{:} \PY{n}{real\PYZus{}batch}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n}{latent}\PY{p}{\PYZcb{}}\PY{p}{)}  
+                      \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{g\PYZus{}train\PYZus{}op\PYZus{}SGD}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{z}\PY{p}{:} \PY{n}{latent}\PY{p}{\PYZcb{}}\PY{p}{)}
+                      
+                  \PY{c+c1}{\PYZsh{} after each epoch, save the loss funtion value in to the loss[]}
+                  \PY{n}{d\PYZus{}save\PYZus{}loss}\PY{o}{=}\PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{d\PYZus{}loss}\PY{p}{,}\PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{real\PYZus{}image}\PY{p}{:} \PY{n}{real\PYZus{}batch}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n}{latent}\PY{p}{\PYZcb{}}\PY{p}{)}
+                  \PY{n}{g\PYZus{}save\PYZus{}loss}\PY{o}{=}\PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{g\PYZus{}loss}\PY{p}{,}\PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{z}\PY{p}{:} \PY{n}{latent}\PY{p}{\PYZcb{}}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{/}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{...}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{epochs}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Discriminator Loss: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{...}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{d\PYZus{}save\PYZus{}loss}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Generator Loss: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{g\PYZus{}save\PYZus{}loss}\PY{p}{)}\PY{p}{)}    
+                  \PY{n}{loss}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{d\PYZus{}save\PYZus{}loss}\PY{p}{,}\PY{n}{g\PYZus{}save\PYZus{}loss}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{sample\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{gen\PYZus{}samples} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}
+                                 \PY{n}{generator}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{l+m+mi}{784}\PY{p}{,}\PY{n}{n\PYZus{}units}\PY{p}{,}\PY{k+kc}{True}\PY{p}{,} \PY{n}{alpha}\PY{p}{)}\PY{p}{,}
+                                 \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{z}\PY{p}{:} \PY{n}{sample\PYZus{}z}\PY{p}{\PYZcb{}}\PY{p}{)}
+                  \PY{n}{sample}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{gen\PYZus{}samples}\PY{p}{)}
+                  \PY{n}{save\PYZus{}path} \PY{o}{=} \PY{n}{saver}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Applications/GAN/SGD/5\PYZus{}1/generator5\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                      
+                      
+                      
+                      
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/100{\ldots} Discriminator Loss: 0.4997{\ldots} Generator Loss: 1.9281
+Epoch 2/100{\ldots} Discriminator Loss: 0.3832{\ldots} Generator Loss: 3.0752
+Epoch 3/100{\ldots} Discriminator Loss: 0.3745{\ldots} Generator Loss: 3.3116
+Epoch 4/100{\ldots} Discriminator Loss: 0.3853{\ldots} Generator Loss: 3.1189
+Epoch 5/100{\ldots} Discriminator Loss: 0.4227{\ldots} Generator Loss: 2.6856
+Epoch 6/100{\ldots} Discriminator Loss: 0.5393{\ldots} Generator Loss: 3.2522
+Epoch 7/100{\ldots} Discriminator Loss: 0.4277{\ldots} Generator Loss: 2.7735
+Epoch 8/100{\ldots} Discriminator Loss: 0.4080{\ldots} Generator Loss: 3.2761
+Epoch 9/100{\ldots} Discriminator Loss: 0.4052{\ldots} Generator Loss: 3.0905
+Epoch 10/100{\ldots} Discriminator Loss: 0.4153{\ldots} Generator Loss: 3.4960
+Epoch 11/100{\ldots} Discriminator Loss: 0.4272{\ldots} Generator Loss: 3.4717
+Epoch 12/100{\ldots} Discriminator Loss: 0.4134{\ldots} Generator Loss: 3.6221
+Epoch 13/100{\ldots} Discriminator Loss: 0.4028{\ldots} Generator Loss: 3.6503
+Epoch 14/100{\ldots} Discriminator Loss: 0.4159{\ldots} Generator Loss: 3.6256
+Epoch 15/100{\ldots} Discriminator Loss: 0.4436{\ldots} Generator Loss: 3.3111
+Epoch 16/100{\ldots} Discriminator Loss: 0.4246{\ldots} Generator Loss: 3.6650
+Epoch 17/100{\ldots} Discriminator Loss: 0.4222{\ldots} Generator Loss: 4.5062
+Epoch 18/100{\ldots} Discriminator Loss: 0.4654{\ldots} Generator Loss: 3.3217
+Epoch 19/100{\ldots} Discriminator Loss: 0.4593{\ldots} Generator Loss: 3.4885
+Epoch 20/100{\ldots} Discriminator Loss: 0.4471{\ldots} Generator Loss: 4.1832
+Epoch 21/100{\ldots} Discriminator Loss: 0.4589{\ldots} Generator Loss: 3.2958
+Epoch 22/100{\ldots} Discriminator Loss: 0.4645{\ldots} Generator Loss: 3.3513
+Epoch 23/100{\ldots} Discriminator Loss: 0.4562{\ldots} Generator Loss: 3.3354
+Epoch 24/100{\ldots} Discriminator Loss: 0.4052{\ldots} Generator Loss: 3.6309
+Epoch 25/100{\ldots} Discriminator Loss: 0.4634{\ldots} Generator Loss: 3.1875
+Epoch 26/100{\ldots} Discriminator Loss: 0.4764{\ldots} Generator Loss: 3.0693
+Epoch 27/100{\ldots} Discriminator Loss: 0.4443{\ldots} Generator Loss: 3.7378
+Epoch 28/100{\ldots} Discriminator Loss: 0.4399{\ldots} Generator Loss: 3.3498
+Epoch 29/100{\ldots} Discriminator Loss: 0.4507{\ldots} Generator Loss: 3.6264
+Epoch 30/100{\ldots} Discriminator Loss: 0.4757{\ldots} Generator Loss: 3.3737
+Epoch 31/100{\ldots} Discriminator Loss: 0.4353{\ldots} Generator Loss: 3.7015
+Epoch 32/100{\ldots} Discriminator Loss: 0.4836{\ldots} Generator Loss: 3.3015
+Epoch 33/100{\ldots} Discriminator Loss: 0.4917{\ldots} Generator Loss: 3.1488
+Epoch 34/100{\ldots} Discriminator Loss: 0.5268{\ldots} Generator Loss: 2.7285
+Epoch 35/100{\ldots} Discriminator Loss: 0.5297{\ldots} Generator Loss: 3.4108
+Epoch 36/100{\ldots} Discriminator Loss: 0.5020{\ldots} Generator Loss: 3.0018
+Epoch 37/100{\ldots} Discriminator Loss: 0.4941{\ldots} Generator Loss: 3.4296
+Epoch 38/100{\ldots} Discriminator Loss: 0.4875{\ldots} Generator Loss: 4.1650
+Epoch 39/100{\ldots} Discriminator Loss: 0.4654{\ldots} Generator Loss: 3.4038
+Epoch 40/100{\ldots} Discriminator Loss: 0.4865{\ldots} Generator Loss: 3.2945
+Epoch 41/100{\ldots} Discriminator Loss: 0.6413{\ldots} Generator Loss: 2.0244
+Epoch 42/100{\ldots} Discriminator Loss: 0.4696{\ldots} Generator Loss: 3.1007
+Epoch 43/100{\ldots} Discriminator Loss: 0.5006{\ldots} Generator Loss: 3.8528
+Epoch 44/100{\ldots} Discriminator Loss: 0.4867{\ldots} Generator Loss: 3.3427
+Epoch 45/100{\ldots} Discriminator Loss: 0.5256{\ldots} Generator Loss: 2.9342
+Epoch 46/100{\ldots} Discriminator Loss: 0.5603{\ldots} Generator Loss: 3.1841
+Epoch 47/100{\ldots} Discriminator Loss: 0.4993{\ldots} Generator Loss: 3.2896
+Epoch 48/100{\ldots} Discriminator Loss: 0.5121{\ldots} Generator Loss: 2.9181
+Epoch 49/100{\ldots} Discriminator Loss: 0.6388{\ldots} Generator Loss: 1.8735
+Epoch 50/100{\ldots} Discriminator Loss: 0.5897{\ldots} Generator Loss: 3.4984
+Epoch 51/100{\ldots} Discriminator Loss: 0.5267{\ldots} Generator Loss: 2.9716
+Epoch 52/100{\ldots} Discriminator Loss: 0.4739{\ldots} Generator Loss: 3.1429
+Epoch 53/100{\ldots} Discriminator Loss: 0.5011{\ldots} Generator Loss: 3.3354
+Epoch 54/100{\ldots} Discriminator Loss: 0.4998{\ldots} Generator Loss: 3.7068
+Epoch 55/100{\ldots} Discriminator Loss: 0.5649{\ldots} Generator Loss: 2.3470
+Epoch 56/100{\ldots} Discriminator Loss: 0.5170{\ldots} Generator Loss: 2.9634
+Epoch 57/100{\ldots} Discriminator Loss: 0.4951{\ldots} Generator Loss: 3.2025
+Epoch 58/100{\ldots} Discriminator Loss: 0.4898{\ldots} Generator Loss: 3.4481
+Epoch 59/100{\ldots} Discriminator Loss: 0.4422{\ldots} Generator Loss: 3.5252
+Epoch 60/100{\ldots} Discriminator Loss: 0.5447{\ldots} Generator Loss: 3.4583
+Epoch 61/100{\ldots} Discriminator Loss: 0.6478{\ldots} Generator Loss: 1.9347
+Epoch 62/100{\ldots} Discriminator Loss: 0.4947{\ldots} Generator Loss: 3.1969
+Epoch 63/100{\ldots} Discriminator Loss: 0.4843{\ldots} Generator Loss: 3.2210
+Epoch 64/100{\ldots} Discriminator Loss: 0.4956{\ldots} Generator Loss: 3.3834
+Epoch 65/100{\ldots} Discriminator Loss: 0.4507{\ldots} Generator Loss: 3.3941
+Epoch 66/100{\ldots} Discriminator Loss: 0.4839{\ldots} Generator Loss: 3.1492
+Epoch 67/100{\ldots} Discriminator Loss: 0.4609{\ldots} Generator Loss: 3.4972
+Epoch 68/100{\ldots} Discriminator Loss: 0.5886{\ldots} Generator Loss: 2.6714
+Epoch 69/100{\ldots} Discriminator Loss: 0.4862{\ldots} Generator Loss: 3.1645
+Epoch 70/100{\ldots} Discriminator Loss: 0.4947{\ldots} Generator Loss: 3.2757
+Epoch 71/100{\ldots} Discriminator Loss: 0.4683{\ldots} Generator Loss: 3.4322
+Epoch 72/100{\ldots} Discriminator Loss: 0.5244{\ldots} Generator Loss: 3.2395
+Epoch 73/100{\ldots} Discriminator Loss: 0.4366{\ldots} Generator Loss: 3.6484
+Epoch 74/100{\ldots} Discriminator Loss: 0.8106{\ldots} Generator Loss: 5.0280
+Epoch 75/100{\ldots} Discriminator Loss: 0.4733{\ldots} Generator Loss: 3.3796
+Epoch 76/100{\ldots} Discriminator Loss: 0.4319{\ldots} Generator Loss: 3.8671
+Epoch 77/100{\ldots} Discriminator Loss: 0.5694{\ldots} Generator Loss: 3.2700
+Epoch 78/100{\ldots} Discriminator Loss: 0.4952{\ldots} Generator Loss: 3.1732
+Epoch 79/100{\ldots} Discriminator Loss: 0.4635{\ldots} Generator Loss: 3.4388
+Epoch 80/100{\ldots} Discriminator Loss: 1.4057{\ldots} Generator Loss: 0.7110
+Epoch 81/100{\ldots} Discriminator Loss: 0.4843{\ldots} Generator Loss: 3.3059
+Epoch 82/100{\ldots} Discriminator Loss: 0.5388{\ldots} Generator Loss: 2.7697
+Epoch 83/100{\ldots} Discriminator Loss: 0.5778{\ldots} Generator Loss: 2.4986
+Epoch 84/100{\ldots} Discriminator Loss: 0.5065{\ldots} Generator Loss: 3.0049
+Epoch 85/100{\ldots} Discriminator Loss: 0.5081{\ldots} Generator Loss: 3.1263
+Epoch 86/100{\ldots} Discriminator Loss: 0.4710{\ldots} Generator Loss: 3.4533
+Epoch 87/100{\ldots} Discriminator Loss: 0.5458{\ldots} Generator Loss: 2.5181
+Epoch 88/100{\ldots} Discriminator Loss: 0.5582{\ldots} Generator Loss: 2.7824
+Epoch 89/100{\ldots} Discriminator Loss: 0.5187{\ldots} Generator Loss: 2.9450
+Epoch 90/100{\ldots} Discriminator Loss: 0.4982{\ldots} Generator Loss: 3.9257
+Epoch 91/100{\ldots} Discriminator Loss: 0.5398{\ldots} Generator Loss: 3.4235
+Epoch 92/100{\ldots} Discriminator Loss: 0.5116{\ldots} Generator Loss: 3.2395
+Epoch 93/100{\ldots} Discriminator Loss: 0.5707{\ldots} Generator Loss: 2.9908
+Epoch 94/100{\ldots} Discriminator Loss: 0.4375{\ldots} Generator Loss: 3.4828
+Epoch 95/100{\ldots} Discriminator Loss: 0.4575{\ldots} Generator Loss: 3.6196
+Epoch 96/100{\ldots} Discriminator Loss: 0.5046{\ldots} Generator Loss: 3.1250
+Epoch 97/100{\ldots} Discriminator Loss: 0.4747{\ldots} Generator Loss: 3.3461
+Epoch 98/100{\ldots} Discriminator Loss: 0.5856{\ldots} Generator Loss: 2.3963
+Epoch 99/100{\ldots} Discriminator Loss: 0.5261{\ldots} Generator Loss: 3.2460
+Epoch 100/100{\ldots} Discriminator Loss: 0.4935{\ldots} Generator Loss: 3.2017
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}511}]:} \PY{k+kn}{import} \PY{n+nn}{pickle} \PY{k}{as} \PY{n+nn}{pkl}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./SGD/5\PYZus{}1/train\PYZus{}samples5\PYZus{}1.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{pkl}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{sample}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}512}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./SGD/5\PYZus{}1/train\PYZus{}samples5\PYZus{}1.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{sample} \PY{o}{=} \PY{n}{pkl}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}513}]:} \PY{k}{def} \PY{n+nf}{vie\PYZus{}example}\PY{p}{(}\PY{n}{samples}\PY{p}{,}\PY{n}{epoch}\PY{p}{)}\PY{p}{:}
+              \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{img} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{samples}\PY{p}{[}\PY{n}{epoch}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                  \PY{n}{im} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}514}]:} \PY{n}{vie\PYZus{}example}\PY{p}{(}\PY{n}{sample}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}515}]:} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{sample}\PY{p}{)}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}515}]:} (100, 2, 16, 784)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}516}]:} \PY{n}{rows}\PY{p}{,} \PY{n}{cols} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}
+          \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{,} \PY{n}{nrows}\PY{o}{=}\PY{n}{rows}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{n}{cols}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{sampl\PYZus{}sub}\PY{p}{,} \PY{n}{ax\PYZus{}row} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{sample}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sample}\PY{p}{)}\PY{o}{/}\PY{n}{rows}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axes}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{img}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{sampl\PYZus{}sub}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sampl}\PY{p}{)}\PY{o}{/}\PY{n}{cols}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ax\PYZus{}row}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}517}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+          \PY{n}{loss} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{loss}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{loss}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Discriminator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{loss}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training Losses}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}518}]:} \PY{k}{def} \PY{n+nf}{vie\PYZus{}example\PYZus{}test}\PY{p}{(}\PY{n}{samples}\PY{p}{)}\PY{p}{:}
+              \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{k}{for} \PY{n}{ax}\PY{p}{,} \PY{n}{img} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                  \PY{n}{im} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}519}]:} \PY{n}{saver} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{Saver}\PY{p}{(}\PY{n}{var\PYZus{}list}\PY{o}{=}\PY{n}{g\PYZus{}vars}\PY{p}{)}
+          \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+              \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{latest\PYZus{}checkpoint}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Applications/GAN/SGD/5\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{sample\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+              \PY{n}{gen\PYZus{}samples\PYZus{}test} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}
+                                 \PY{n}{generator}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{l+m+mi}{784}\PY{p}{,}\PY{n}{n\PYZus{}units}\PY{p}{,}\PY{k+kc}{True}\PY{p}{,} \PY{n}{alpha}\PY{p}{)}\PY{p}{,}
+                                 \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{z}\PY{p}{:} \PY{n}{sample\PYZus{}z}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{vie\PYZus{}example\PYZus{}test}\PY{p}{(}\PY{n}{gen\PYZus{}samples\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from /Applications/GAN/SGD/5\_1/generator5\_1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}466}]:} \PY{n}{mnist}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}466}]:} Datasets(train=<tensorflow.contrib.learn.python.learn.datasets.mnist.DataSet object at 0x1c201bef60>, validation=<tensorflow.contrib.learn.python.learn.datasets.mnist.DataSet object at 0x1c29099128>, test=<tensorflow.contrib.learn.python.learn.datasets.mnist.DataSet object at 0x1c29099048>)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}468}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{images} \PY{c+c1}{\PYZsh{} Returns np.array}
+          \PY{n}{train\PYZus{}labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+          \PY{n}{eval\PYZus{}data} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{test}\PY{o}{.}\PY{n}{images} \PY{c+c1}{\PYZsh{} Returns np.array}
+          \PY{n}{eval\PYZus{}labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{test}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}496}]:} \PY{n}{train\PYZus{}labels}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}496}]:} array([1, 5, 9, {\ldots}, 3, 9, 5], dtype=int32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}500}]:} \PY{n}{batchsss}\PY{o}{=}\PY{n}{mnist}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{next\PYZus{}batch}\PY{p}{(}\PY{l+m+mi}{55000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}501}]:} \PY{n}{batchsss}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}501}]:} array([9, 3, 6, {\ldots}, 7, 3, 5], dtype=uint8)
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
